@@ -4,25 +4,30 @@
 
 {% block body_block %}
 
-    <h2>Results: {{ reference }}</h2>
+    <!-- Users own reference from Form -->
+    <h2>Reference: {{ reference }}</h2>
 
+    <!-- Results for items searched from form details... -->
+    <h3>Search results for:</h3>
+
+    <!-- looping for each website; site_key and results -->
     {% for site_key, results in items_dic.items %}
 
         <!-- site_key is first dictionary key for each auction site -->
         <h4>Auction site: {{ site_key }}</h4>
 
-
-        <table class="table table-striped"> 
+        <table class="table table-striped">
             
             <!-- each site contains numerous auction items by index -->
             {% for index_result_key, result in results.items %}
-                <!-- first index [0] is the element titles. Display these in the thead -->
+
+            <!-- first index [0] is the element titles. Display these in the thead -->
                 {% if index_result_key == '0' %}
                     <thead>
                         <th>#</th>
                         {% for item_key, spare in result.items %}
                             {% if item_key == 'a' %}
-                                <th>Listing Link</th>>
+                                <th>Listing Link</th>
                             {% elif item_key == 'img' %}
                                 <th>Listing Image</th>
                             {% else %}
@@ -30,6 +35,7 @@
                             {% endif %}
                         {% endfor%}
                     </thead>
+
                 <!-- display the results for each index from [1] -->
                 {% else %}
                     <tbody>
