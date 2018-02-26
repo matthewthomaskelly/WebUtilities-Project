@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+    <h2>Results: {{ reference }}</h2>
+
+    {% for site_key, results in items_dic.items %}
+
+        <!-- site_key is first dictionary key for each auction site -->
+        <h4>Auction site: {{ site_key }}</h4>
+
+
+        <table class="table table-striped"> 
+            
+            <!-- each site contains numerous auction items by index -->
+            {% for index_result_key, result in results.items %}
+                <!-- first index [0] is the element titles. Display these in the thead -->
+                {% if index_result_key == '0' %}
+                    <thead>
+                        <th>#</th>
+                        {% for item_key, spare in result.items %}
+                            {% if item_key == 'a' %}
+                                <th>Listing Link</th>>
+                            {% elif item_key == 'img' %}
+                                <th>Listing Image</th>
+                            {% else %}
+                                <th>{{ item_key|title }}</th>
+                            {% endif %}
+                        {% endfor%}
+                    </thead>
+                <!-- display the results for each index from [1] -->
+                {% else %}
+                    <tbody>
+                        <tr>
+                            <td>{{ index_result_key }}</td>
+                            {% for item_key, item in result.items %}
+                            <td class="crop">
+                                {% if item_key == 'a' %}
+                                    <a href='{{ item }}'>Listing Link</a>
+                                {% else %}
+                                    {% if item_key == 'img' %}
+                                        <img width=100px src='{{ item }}' alt="Listing Thumbnail"/>
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endfor %}
+
+{% endblock %}
