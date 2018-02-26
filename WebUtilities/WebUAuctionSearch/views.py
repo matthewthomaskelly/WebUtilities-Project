@@ -52,8 +52,10 @@ def new_search(request):
  
                     itemsDic[eachDBAuctionSite.name] = {}                                                          
                     itemsDic[eachDBAuctionSite.name] = get_items_dic(webSearchAddress, queryTerms, soupTerms)
-                                
-        return render(request, 'results.html', {'items_dic': itemsDic, 'reference': form.cleaned_data['reference']} )
+
+                    searchCriteria = description + " within " + distance + " miles of " + postcode
+
+        return render(request, 'results.html', {'items_dic': itemsDic, 'reference': form.cleaned_data['reference'], 'searchCriteria': searchCriteria} )
     else:
         print(form.errors)
 
@@ -63,9 +65,14 @@ def new_search(request):
 
 def get_items_dic(webSearchAddress, queryTerms, soupTerms):
 
+    Proxies = {
+                'http://www.ebay.co.uk': '163.172.220.221:8888', 
+                'https://www.ebay.co.uk': '163.172.220.221:8888'
+            }
+
     AuctionsResultsSoup = WebAuctionSoup()
     urlRequest = AuctionsResultsSoup.create_url_request(webSearchAddress, queryTerms)
-    resultsSoup = AuctionsResultsSoup.get_soup(urlRequest)
+    resultsSoup = AuctionsResultsSoup.get_soup(urlRequest, Proxies)
 
     returnDic = {}
     returnDic.update({str(0): soupTerms['elements'] })

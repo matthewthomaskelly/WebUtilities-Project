@@ -2,6 +2,8 @@ import bs4 # beautiful soup
 import urllib.request # url library to request an url
 import urllib.parse # url library to parse htmk queries
 
+import requests
+
 
 # ************************************************************************
 # ** Name:          Class WebAuctionSoup()
@@ -102,11 +104,18 @@ class WebAuctionSoup():
     # ** Returns:   Returns Soup
     # ** Amendments:None
     # ********************************************************************
-    def get_soup(self, Url):
+    def get_soup(self, Url, Proxies={}):
+        
         # Get request URL
-        Req = urllib.request.urlopen(Url)
-        # Submit to Beautiful Soup
-        Soup = bs4.BeautifulSoup(Req, "html.parser")
+        #Req = urllib.request.urlopen(Url)
+        if Proxies:
+            Req = requests.get(Url, Proxies)
+        else:
+            Req = requests.get(Url)
+        
+        # Submit to Beautiful Soup. Use lxml parser for speed!
+        Soup = bs4.BeautifulSoup(Req.text, "lxml")
+        
         # and return soup
         return Soup
 

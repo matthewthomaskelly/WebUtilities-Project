@@ -8,7 +8,7 @@
     <h2>Reference: {{ reference }}</h2>
 
     <!-- Results for items searched from form details... -->
-    <h3>Search results for:</h3>
+    <h3>Search results for: {{ searchCriteria }}</h3>
 
     <!-- looping for each website; site_key and results -->
     {% for site_key, results in items_dic.items %}
