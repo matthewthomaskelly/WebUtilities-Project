@@ -104,14 +104,14 @@ class WebAuctionSoup():
     # ** Returns:   Returns Soup
     # ** Amendments:None
     # ********************************************************************
-    def get_soup(self, Url, Proxies={}):
+    def get_soup(self, url, proxies={}):
 
         # Get request URL
         #Req = urllib.request.urlopen(Url)
-        if Proxies:
-            Req = requests.get(Url, Proxies)
+        if proxies:
+            Req = requests.get(url, proxies=proxies)
         else:
-            Req = requests.get(Url)
+            Req = requests.get(url)
 
         # Submit to Beautiful Soup. Use lxml parser for speed!
         Soup = bs4.BeautifulSoup(Req.text, "lxml")
