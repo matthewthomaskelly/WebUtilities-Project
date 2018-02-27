@@ -8,10 +8,10 @@ import requests
 # ************************************************************************
 # ** Name:          Class WebAuctionSoup()
 # ** Purpose:       To take a list of values and to scrape websites for items as
-# **                 specified. Examples include GumTree.com bike, within radius 
+# **                 specified. Examples include GumTree.com bike, within radius
 # **                 of a postcode.
 # ****          This class will currently only handle GumTree searches.         ****
-# ****          Use Inheritance for further websites such as eBay, Preloved?    ****    
+# ****          Use Inheritance for further websites such as eBay, Preloved?    ****
 # ** Creation date: March 2017
 # ** Author:        Matthew KELLY
 # ** Inputs:        None at present
@@ -48,7 +48,7 @@ class WebAuctionSoup():
     # ********************************************************************
     # ** Name:      function get_website_items_dict
     # ** Purpose:   Queries the Soup item to return specific items
-    # **            This is the class function that would mainly need amending 
+    # **            This is the class function that would mainly need amending
     # **             if other websites were incorporated
     # ** Inputs:    soup - current soup item
     # **            RelativeFolderToDownload - optional folder location to save images
@@ -61,10 +61,10 @@ class WebAuctionSoup():
         if 'findAll' in websiteDict:
             # find all natural soup items
             FindAllSoupItems = soup.find_all(class_=websiteDict['findAll'])
-        else: # just continue 
+        else: # just continue
             FindAllSoupItems = soup
 
-         # iterate through each 'natural' item pulling specified data and storing this in variables    
+         # iterate through each 'natural' item pulling specified data and storing this in variables
         for CurrentSoupItem in FindAllSoupItems:
 
             buildDic = {}
@@ -84,7 +84,7 @@ class WebAuctionSoup():
                             currString = CurrentSoupItem.find(class_=eachDefinition[0]).img.get(eachDefinition[1])
                             if currString != None:
                                 break
-                        if currString == None:    
+                        if currString == None:
                             currString = ""
                     else:
                         # The Listing title
@@ -93,7 +93,7 @@ class WebAuctionSoup():
                     currString = ""
                 #buildDic[eachElement] = currString.strip()
                 buildDic[eachElement] = currString
-            
+
             # yield for each natural item
             yield buildDic
 
@@ -105,17 +105,17 @@ class WebAuctionSoup():
     # ** Amendments:None
     # ********************************************************************
     def get_soup(self, Url, Proxies={}):
-        
+
         # Get request URL
         #Req = urllib.request.urlopen(Url)
         if Proxies:
             Req = requests.get(Url, Proxies)
         else:
             Req = requests.get(Url)
-        
+
         # Submit to Beautiful Soup. Use lxml parser for speed!
         Soup = bs4.BeautifulSoup(Req.text, "lxml")
-        
+
         # and return soup
         return Soup
 

@@ -32,12 +32,12 @@ def new_search(request):
 
         #form.save(commit=True)
         itemsDic = {}
-        
+
         for eachWebsiteChoice in form.cleaned_data['auction_Choices']:
 
             for eachDBAuctionSite in AuctionSiteDetails.objects.all():
 
-                if eachWebsiteChoice in eachDBAuctionSite.name: 
+                if eachWebsiteChoice in eachDBAuctionSite.name:
 
                     webSearchAddress = eachDBAuctionSite.url_search
 
@@ -49,8 +49,8 @@ def new_search(request):
 
                     soupTerms = eachDBAuctionSite.soupTermsDic
                     soupTerms = ast.literal_eval(soupTerms)
- 
-                    itemsDic[eachDBAuctionSite.name] = {}                                                          
+
+                    itemsDic[eachDBAuctionSite.name] = {}
                     itemsDic[eachDBAuctionSite.name] = get_items_dic(webSearchAddress, queryTerms, soupTerms)
 
                     searchCriteria = description + " within " + distance + " miles of " + postcode
@@ -66,8 +66,8 @@ def new_search(request):
 def get_items_dic(webSearchAddress, queryTerms, soupTerms):
 
     Proxies = {
-                'http://www.ebay.co.uk': '163.172.220.221:8888', 
-                'https://www.ebay.co.uk': '163.172.220.221:8888'
+                'http': '163.172.220.221:8888',
+                'https': '163.172.220.221:8888'
             }
 
     AuctionsResultsSoup = WebAuctionSoup()
