@@ -107,7 +107,6 @@ class WebAuctionSoup():
     def get_soup(self, url, proxies={}):
 
         # Get request URL
-        #Req = urllib.request.urlopen(Url)
         if proxies:
             Req = requests.get(url, proxies=proxies)
         else:

@@ -1,0 +1,20 @@
+Preloved
+Preloved - Free classified ads
+www.preloved.co.uk
+www.preloved.co.uk
+{ "keyword": '@description',  "location": '@postcode', "distance": '@distance', }
+{ 'website': "http://www.preloved.com", 'findAll': "search-result", 'elements':{ 'listing_description': "search-result__description",  'a':  "no-underline",'img':( ("search-result__media-link", "data-src"), ) } }
+
+Gumtree
+Gumtree - ads in the UK
+www.gumtree.com
+www.gumtree.com
+{"q": '@description', "search_location": '@postcode', "distance": '@distance', "search_category": "for-sale" }
+{'website': "http://www.gumtree.com", 'findAll': "natural", 'elements':{'listing_title': "listing-title",'listing_description': "listing-description",'a':  "listing-link",'img':( ("listing-thumbnail", "data-lazy"), ) } }
+
+eBay
+eBay - auctions
+www.ebay.co.uk
+www.ebay.co.uk/sch/i.html
+{ "_from": 'R40', "_sacat": '0', "_nkw": '@description', "rt": 'nc', "_sadis": '@distance', "_fspt": '1', "LH_PrefLoc": '99', "_pgn": '1', "_stpos": '@postcode' }
+{ 'website': "http://www.ebay.co.uk", 'findAll': "sresult", 'elements': { 'listing_title': "lvtitle", 'a': 'vip', 'img':( ("imgWr2", "imgurl"), ("imgWr2", "src") ) } }
