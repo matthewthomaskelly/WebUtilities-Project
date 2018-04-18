@@ -108,7 +108,7 @@ class WebAuctionSoup():
 
         # Get request URL
         if proxies:
-            Req = requests.get(url, proxies=proxies)
+            Req = requests.get(url, proxies=proxies, verify=False)
         else:
             Req = requests.get(url)
 
